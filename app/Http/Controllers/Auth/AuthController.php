@@ -38,7 +38,7 @@ class AuthController extends Controller
 
         if(!$user || ! Hash::check($loginRequest->password, $user->password)) {
             return response([
-                'Error' => "Invalid credentials"
+                'message' => "Invalid credentials"
             ]);
         }
         // create token
@@ -46,6 +46,7 @@ class AuthController extends Controller
         $token = $user->createToken('questionapp')->plainTextToken;
 
         return response([
+            'success' => true,
             'user' => $user,
             'token' => $token
         ], 200);
